@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>TBD Library</title>
+    <!-- Thêm link FontAwesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* Phần thông tin */
+      .info-section {
+        background-color: #f4f4f4;
+        color: white;
+      }
+
+      .top-bar {
+        background-color: #eb6556;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px 20px;
+        font-size: 15px;
+        color: white;
+        padding-left: 150px;
+        gap: 15px;
+        flex-wrap: wrap;
+      }
+
+      nav {
+        padding: 10px 20px;
+      }
+
+      nav a {
+        margin: 0 10px;
+        color: rgb(0, 0, 0);
+        font-weight: bold;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      nav a:hover {
+        color: rgb(247, 152, 0);
+      }
+
+      .hero {
+        background-image: url("your-campus-photo.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        color: white;
+        padding: 0;
+        text-align: center;
+        position: relative;
+        height: 494px;
+        overflow: hidden;
+      }
+
+      .hero-box {
+        position: absolute;
+        top: 0px;
+        left: 0;
+        width: 1920px;
+        height: 494px;
+        max-width: 100%;
+        text-align: center;
+        overflow: hidden;
+      }
+
+      .hero-box img.slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+      }
+
+      .hero-box img.slide.active {
+        opacity: 1;
+        z-index: 1;
+      }
+
+      footer {
+        background-color: #d63b3b;
+        color: white;
+        text-align: center;
+        padding: 10px;
+      }
+
+      /* Phần chức năng */
+      .search-section {
+        background-color: #19245c;
+        color: white;
+        padding: 20px;
+        text-align: center;
+      }
+
+      .tabs {
+        margin: 10px 0;
+      }
+
+      .tabs a {
+        margin: 0 10px;
+        color: rgb(255, 255, 255);
+        text-decoration: underline;
+        transition: color 0.3s ease;
+      }
+
+      .tabs a:hover {
+        color: rgb(243, 168, 47);
+      }
+
+      .search-bar input[type="text"] {
+        width: 50%;
+        padding: 10px;
+      }
+
+      .search-bar button {
+        padding: 10px 20px;
+        background-color: #004f5d;
+        color: white;
+        border: none;
+      }
+
+      .tools {
+        display: flex;
+        justify-content: space-around;
+        background-color: #eee;
+        padding: 15px;
+        font-weight: bold;
+        color: #19245c;
+      }
+
+      .tools div:hover {
+        text-decoration: underline;
+        cursor: pointer;
+        color: #004f5d;
+        transition: color 0.3s ease;
+      }
+
+      /* Màu trắng cho icon FontAwesome trong top-bar */
+      .top-bar i {
+        color: white;
+        margin-right: 5px;
+      }
+      /* CSS cho icon mạng xã hội trong top-bar */
+      .social-icons a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border: 2px solid white;
+        border-radius: 40%;
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+
+      /* Hover chung (nếu muốn) */
+      .social-icons a:hover {
+        cursor: pointer;
+        /* Không đặt color ở đây để giữ màu trắng icon */
+        color: white;
+      }
+
+      /* Riêng hover Facebook */
+      .social-icons a.facebook:hover {
+        background-color: #1877f2; /* Màu xanh Facebook */
+        color: white; /* Giữ icon màu trắng */
+      }
+
+      /* Riêng hover YouTube */
+      .social-icons a.youtube:hover {
+        background-color: #ff0000; /* Màu đỏ YouTube */
+        color: white; /* Giữ icon màu trắng */
+      }
+
+      /* Màu trắng cho icon search trong nav */
+      nav i.fas.fa-search {
+        color: white;
+      }
+
+      /* CSS cho địa chỉ hover */
+      .address,
+      .time {
+        position: relative;
+        cursor: default;
+        display: inline-block;
+        color: white;
+        font-weight: normal;
+      }
+
+      .address .full-address,
+      .time .full-time {
+        display: none;
+        position: absolute;
+        top: 120%; /* khoảng cách xuống dưới */
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #000; /* màu nền đen */
+        color: white;
+        padding: 8px 12px;
+        white-space: nowrap;
+        border-radius: 6px;
+        font-size: 14px;
+        z-index: 100;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+      }
+
+      /* Mũi tên tooltip */
+      .address .full-address::after,
+      .time .full-time::after {
+        content: "";
+        position: absolute;
+        top: -6px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-width: 6px;
+        border-style: solid;
+        border-color: transparent transparent #000 transparent;
+      }
+
+      .address:hover .full-address,
+      .time:hover .full-time {
+        display: block;
+      }
+      .email,
+      .phone {
+        position: relative;
+        cursor: default;
+        display: inline-block;
+        color: white;
+        font-weight: normal;
+      }
+
+      .email .full-email,
+      .phone .full-phone {
+        display: none;
+        position: absolute;
+        top: 120%;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #000;
+        color: white;
+        padding: 8px 12px;
+        white-space: nowrap;
+        border-radius: 6px;
+        font-size: 14px;
+        z-index: 100;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+      }
+
+      .email .full-email::after,
+      .phone .full-phone::after {
+        content: "";
+        position: absolute;
+        top: -6px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-width: 6px;
+        border-style: solid;
+        border-color: transparent transparent #000 transparent;
+      }
+
+      .email:hover .full-email,
+      .phone:hover .full-phone {
+        display: block;
+      }
+      /* Hover cho địa chỉ, email, thời gian, điện thoại */
+      .address:hover,
+      .email:hover,
+      .time:hover,
+      .phone:hover {
+        color: rgb(242, 242, 242); /* màu cam khi hover */
+        text-decoration: underline;
+        transition: color 0.3s ease;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Phần thông tin -->
+    <div
+      class="top-bar"
+      style="justify-content: space-between; gap: 15px; flex-wrap: wrap"
+    >
+      <!-- Bên trái: thông tin -->
+      <div style="display: flex; gap: 15px; flex-wrap: wrap">
+        <div class="address">
+          <i class="fas fa-map-marker-alt"></i> Địa chỉ
+          <div class="full-address">
+            79 Mai Thị Dõng, P. Vĩnh Ngọc, TP. Nha Trang
+          </div>
+        </div>
+        <span>|</span>
+        <div class="email">
+          <i class="fas fa-envelope"></i> tt.hoclieu@tbd.edu.vn
+          <div class="full-email">tt.hoclieu@tbd.edu.vn</div>
+        </div>
+        <span>|</span>
+        <div class="time">
+          <i class="fas fa-clock"></i> Thời gian
+          <div class="full-time">
+            7:00 - 20:00 | Thứ Hai - Thứ Sáu | Thứ Bảy: 8:00 - 12:00
+          </div>
+        </div>
+        <span>|</span>
+        <div class="phone">
+          <i class="fas fa-phone"></i> Điện thoại
+          <div class="full-phone">(0274) 222 0990 / 70206</div>
+        </div>
+      </div>
+
+      <!-- Bên phải: icon mạng xã hội -->
+      <div
+        class="social-icons"
+        style="display: flex; gap: 10px; margin-right: 300px"
+      >
+        <a
+          href="https://www.facebook.com/TruongDaihocThaiBinhDuong?locale=vi_VN"
+          target="_blank"
+          class="facebook"
+        >
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a
+          href="https://www.youtube.com/channel/UCLAPTL56tpKD3yUI1x5nq8Q"
+          target="_blank"
+          class="youtube"
+        >
+          <i class="fab fa-youtube"></i>
+        </a>
+      </div>
+    </div>
+
+    <nav
+      style="
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #ffffff;
+        padding: 10px 20px;
+      "
+    >
+      <div style="display: flex; align-items: center">
+        <img
+          src="image.png/logo.png"
+          alt="Logo TBD"
+          style="height: 40px; margin-right: 10px"
+        />
+        <strong style="font-size: 15px; color: rgb(0, 0, 0)"
+          >TBD University</strong
+        >
+      </div>
+      <div style="display: flex; align-items: center">
+        <a href="#">TRANG CHỦ</a>
+        <a href="#">VỀ CHÚNG TÔI</a>
+        <a href="#">QUY ĐỊNH</a>
+        <a href="#">CƠ SỞ</a>
+        <a href="#">TIN TỨC & SỰ KIỆN</a>
+        <a href="#">LIÊN HỆ</a>
+        <a href="#">CÂU HỎI THƯỜNG GẶP</a>
+        <span style="margin-left: 10px">
+          <i class="fas fa-search"></i>
+        </span>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-box">
+        <img src="image.png/panner.png" alt="Banner " class="slide active" />
+        <img src="image.png/panner1.png" alt="Banner 1" class="slide" />
+        <img src="image.png/panner2.png" alt="Banner 2" class="slide" />
+      </div>
+    </section>
+
+    <!-- Phần chức năng -->
+    <section class="search-section">
+      <div class="tabs">
+        <a href="#">Everything</a>
+        <a href="#" style="background-color: gray; padding: 5px">Books</a>
+        <a href="#">Articles</a>
+        <a href="#">VGU theses</a>
+        <a href="#">VGU papers</a>
+      </div>
+      <div class="search-bar">
+        <input type="text" placeholder="Search here..." />
+        <button>OneSEARCH</button>
+      </div>
+      <div style="margin-top: 10px; font-size: 14px">
+        <a href="#" style="color: white">Sign in</a> |
+        <a href="#" style="color: white">Course reserves</a> |
+        <a href="#" style="color: white">Book request</a> |
+        <a href="#" style="color: white">Video tour</a> |
+        <a href="#" style="color: white">Plagiarism check</a>
+      </div>
+    </section>
+
+    <section class="tools">
+      <div>Room booking</div>
+      <div>InterLibrary loan</div>
+      <div>Information-citation skills training</div>
+      <div>Meet a specialist (Research support)</div>
+    </section>
+
+    <footer>&copy; 2025 TBD University Library</footer>
+
+    <script>
+      const slides = document.querySelectorAll(".hero-box img.slide");
+      let currentIndex = 0;
+
+      function showNextSlide() {
+        slides[currentIndex].classList.remove("active");
+        currentIndex = (currentIndex + 1) % slides.length;
+        slides[currentIndex].classList.add("active");
+      }
+
+      setInterval(showNextSlide, 5000); // chuyển ảnh mỗi 5 giây
+    </script>
+  </body>
+</html>
