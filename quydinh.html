@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Quy Định - TBD Library</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,500,700&display=swap" rel="stylesheet">
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      /* Thêm đoạn này để đổi font cho phần quy định */
+      .quydinh-section {
+        font-family: 'IBM Plex Sans', sans-serif;
+        text-align: left;
+        box-sizing: border-box;
+        word-break: break-word;
+        /* Xóa max-width và margin để full width */
+        width: 100%;
+        background: #fff;
+        padding: 0;
+        border-radius: 0;
+        box-shadow: none;
+        display: flex;
+        gap: 40px;
+      }
+      .quydinh-section > div {
+        flex: 1;
+        padding: 32px 32px 32px 40px;
+        background: #fff;
+        border-radius: 0;
+        box-shadow: none;
+      }
+      .quydinh-section > div:nth-child(2) {
+        background: #f8f8f8;
+      }
+      .top-bar {
+        background-color: #d63b3b;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px 20px;
+        padding-left: 150px;
+        font-size: 15px;
+        color: white;
+        gap: 15px;
+        flex-wrap: wrap;
+      }
+      .address,
+      .email,
+      .time,
+      .phone {
+        position: relative;
+        cursor: pointer;
+      }
+      .full-address,
+      .full-email,
+      .full-time,
+      .full-phone {
+        display: none;
+        position: absolute;
+        top: 28px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #000;
+        color: white;
+        padding: 8px 12px;
+        white-space: nowrap;
+        border-radius: 6px;
+        font-size: 14px;
+        z-index: 100;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+      }
+      .address:hover .full-address,
+      .email:hover .full-email,
+      .time:hover .full-time,
+      .phone:hover .full-phone {
+        display: block;
+      }
+      .full-address::after,
+      .full-email::after,
+      .full-time::after,
+      .full-phone::after {
+        content: "";
+        position: absolute;
+        top: -6px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-width: 6px;
+        border-style: solid;
+        border-color: transparent transparent #000 transparent;
+      }
+      nav {
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #ffffff;
+      }
+      nav a {
+        margin: 0 10px;
+        color: rgb(0, 0, 0);
+        font-weight: bold;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+      nav a:hover {
+        color: rgb(247, 152, 0);
+      }
+      .hero {
+        background-image: url("image.png/vechungtoi.png");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        color: white;
+        padding: 0;
+        text-align: center;
+        position: relative;
+        height: 300px;
+        overflow: hidden;
+      }
+      .hero-box {
+        position: absolute;
+        top: 0px;
+        left: 0;
+        width: 100%;
+        height: 300px;
+        max-width: 100%;
+        text-align: center;
+        overflow: hidden;
+        background: rgba(25, 36, 92, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .hero-title {
+        font-size: 40px;
+        font-weight: bold;
+        color: #fff;
+        text-shadow: 2px 2px 8px #19245c;
+      }
+      .quydinh-section h2 {
+        color: #19245c;
+        margin-top: 0;
+      }
+      .quydinh-section ul {
+        padding-left: 20px;
+      }
+      .quydinh-section li {
+        margin-bottom: 8px;
+      }
+      .back-home {
+        margin-top: 20px;
+        display: inline-block;
+        color: #eb6556;
+        text-decoration: none;
+      }
+      .back-home:hover {
+        text-decoration: underline;
+      }
+      .social-icons a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border: 2px solid white;
+        border-radius: 40%;
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+      .social-icons a.facebook:hover {
+        background-color: #1877f2;
+        color: white;
+      }
+      .social-icons a.youtube:hover {
+        background-color: #ff0000;
+        color: white;
+      }
+      footer {
+        background-color: #d63b3b;
+        color: white;
+        text-align: center;
+        padding: 10px;
+      }
+      .top-bar i {
+        color: white;
+        margin-right: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Phần thông tin -->
+    <div
+      class="top-bar"
+      style="justify-content: space-between; gap: 15px; flex-wrap: wrap"
+    >
+      <!-- Bên trái: thông tin -->
+      <div style="display: flex; gap: 15px; flex-wrap: wrap">
+        <div class="address">
+          <a
+            href="https://www.google.com/maps/place/Tr%C6%B0%E1%BB%9Dng+%C4%90%E1%BA%A1i+h%E1%BB%8Dc+Th%C3%A1i+B%C3%ACnh+D%C6%B0%C6%A1ng/@12.2855441,109.1804125,810m/data=!3m2!1e3!4b1!4m6!3m5!1s0x317042b1f53620df:0x12ae90049bdf9f5c!8m2!3d12.2855441!4d109.1804125!16s%2Fg%2F122srzfq?entry=ttu&g_ep=EgoyMDI1MDUyOC4wIKXMDSoASAFQAw%3D%3D"
+            target="_blank"
+            style="color: white; text-decoration: none; display: inline-block;"
+          >
+            <i class="fas fa-map-marker-alt"></i> Địa chỉ
+          </a>
+          <div class="full-address" title="Xem bản đồ trên Google Maps">
+            79 Mai Thị Dõng, P. Vĩnh Ngọc, TP. Nha Trang
+          </div>
+        </div>
+        <span>|</span>
+        <div class="email">
+          <i class="fas fa-envelope"></i> tt.hoclieu@tbd.edu.vn
+          <div class="full-email">tt.hoclieu@tbd.edu.vn</div>
+        </div>
+        <span>|</span>
+        <div class="time">
+          <i class="fas fa-clock"></i> Thời gian
+          <div class="full-time">
+            7:00 - 20:00 | Thứ Hai - Thứ Sáu | Thứ Bảy: 8:00 - 12:00
+          </div>
+        </div>
+        <span>|</span>
+        <div class="phone">
+          <i class="fas fa-phone"></i> Điện thoại
+          <div class="full-phone">(0274) 222 0990 / 70206</div>
+        </div>
+      </div>
+
+      <!-- Bên phải: icon mạng xã hội -->
+      <div
+        class="social-icons"
+        style="display: flex; gap: 10px; margin-right: 300px"
+      >
+        <a
+          href="https://www.facebook.com/TruongDaihocThaiBinhDuong?locale=vi_VN"
+          target="_blank"
+          class="facebook"
+        >
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a
+          href="https://www.youtube.com/channel/UCLAPTL56tpKD3yUI1x5nq8Q"
+          target="_blank"
+          class="youtube"
+        >
+          <i class="fab fa-youtube"></i>
+        </a>
+      </div>
+    </div>
+
+    <nav>
+      <div style="display: flex; align-items: center">
+        <img
+          src="image.png/logo.png"
+          alt="Logo TBD"
+          style="
+            height: 50px;
+            margin-right: 20px;
+            margin-left: 60px;
+            cursor: pointer;
+          "
+          onclick="window.location.href='index.html'"
+        />
+        <strong style="font-size: 15px; color: rgb(0, 0, 0)"> </strong>
+      </div>
+      <div style="display: flex; align-items: center">
+        <a href="index.html">TRANG CHỦ</a>
+        <a href="about.html">VỀ CHÚNG TÔI</a>
+        <a href="quydinh.html" style="color: #eb6556">QUY ĐỊNH</a>
+        <a href="coso.html">CƠ SỞ</a>
+        <a href="#">TIN TỨC & SỰ KIỆN</a>
+        <a href="lienhe.html">LIÊN HỆ</a>
+        <a href="cauhoi.html">CÂU HỎI THƯỜNG GẶP</a>
+        <span style="margin-left: 10px">
+          <i class="fas fa-search"></i>
+        </span>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-box">
+          <span class="hero-title">Quy Định & Dịch Vụ Thư Viện</span>
+      </div>
+    </section>
+    <section class="quydinh-section" style="display: flex; gap: 40px;">
+  <!-- Cột trái: DỊCH VỤ THƯ VIỆN -->
+  <div style="flex:1;">
+    <h2 style="color:#19245c; font-size: 28px; font-weight: 700; margin-bottom: 24px; letter-spacing: 1px;">
+      DỊCH VỤ THƯ VIỆN
+    </h2>
+    <ol style="font-size: 17px; line-height: 1.8; color: #222; padding-left: 22px;">
+      <li style="margin-bottom: 14px;">
+        <strong style="color: #000000; font-size: 17px;">Mượn/Trả/Gia hạn tài liệu</strong>
+      </li>
+      <li style="margin-bottom: 14px;">
+        <strong style="color: #000000; font-size: 17px;">Đăng ký đặt phòng học, làm việc nhóm</strong>
+        <ol style="margin-top: 8px; margin-bottom: 8px; font-size: 16px;">
+          <li>Trước khi sử dụng phòng học nhóm, bạn đọc cần gặp nhân viên thư viện để đăng ký phòng học nhóm.</li>
+          <li>Dịch vụ này hoạt động từ <b>8h00 sáng đến 4h00 chiều</b>, từ <b>thứ Hai đến thứ Sáu</b>. Bạn đọc được sử dụng phòng học nhóm trong <b>2 tiếng</b> và cần tuân thủ các quy định về dịch vụ như sau:</li>
+          <li>Nhóm cần có từ <b>2 thành viên</b></li>
+          <li>Đăng ký trước</li>
+          <li>Nhận phòng đúng giờ</li>
+          <li>Giữ phòng sạch sẽ, gọn gàng và ngăn nắp sau khi sử dụng</li>
+        </ol>
+      </li>
+      <li style="margin-bottom: 14px;">
+        <strong style="color: #000000; font-size: 17px;">Đăng ký thiết bị thư viện</strong>
+      </li>
+      <li style="margin-bottom: 14px;">
+        <strong style="color: #000000; font-size: 17px;">Bổ sung tài liệu</strong>
+      </li>
+      <li style="margin-bottom: 14px;">
+        <strong style="color: #000000; font-size: 17px;">Hỗ trợ tài liệu học tập online</strong>
+        <ol style="margin-top: 8px; margin-bottom: 8px; font-size: 16px;">
+          <li>Thư viện hỗ trợ gửi <b>ebook</b> phục vụ cho quá trình học tập online của bạn đọc. Bạn đọc gặp khó khăn trong tìm kiếm tài liệu, sách tham khảo thì liên hệ ngay để được thư viện hỗ trợ.</li>
+        </ol>
+      </li>
+      <li style="margin-bottom: 14px;">
+        <strong style="color: #000000; font-size: 17px;">Dịch vụ photo, in ấn tài liệu</strong>
+        <ol style="margin-top: 8px; margin-bottom: 8px; font-size: 16px;">
+          <li>Thư viện cung cấp cho bạn đọc dịch vụ in ấn, photocopy tài liệu để việc học tập tại trường trở nên dễ dàng và thuận tiện hơn.</li>
+          <li>Bạn đọc sử dụng máy tính có sẵn tại thư viện để in ấn tài liệu, tạo, chỉnh sửa nội dung.</li>
+          <li>Bạn đọc có thể dùng máy photocopy ở thư viện để photo tài liệu, CMND,…</li>
+          <li>
+            <b>Thanh toán bằng cách nào?</b><br>
+            Bạn đọc cần gặp nhân viên thư viện để thanh toán. Nếu có bất kỳ vấn đề gì, vui lòng liên hệ trực tiếp với cán bộ thư viện để được hỗ trợ.
+          </li>
+          <li>
+            <b>Chi phí bao nhiêu?</b><br>
+            Phí in/ photocopy: <span style="color:#eb6556; font-weight:600;">500 đồng</span> / 1 tờ giấy A4 (đen trắng)<br>
+            Phí in/ photocopy: <span style="color:#eb6556; font-weight:600;">1.000 đồng</span> / 2 tờ giấy A4 trở lên (đen trắng)
+          </li>
+        </ol>
+      </li>
+    </ol>
+    <a class="back-home" href="index.html" style="display:inline-block; margin-top:0px; margin-left:0; font-size:17px; font-weight:500;">
+      <i class="fas fa-arrow-left"></i> Quay về Trang chủ
+    </a>
+  </div>
+  <!-- Cột phải: QUY ĐỊNH MƯỢN TÀI LIỆU -->
+  <div style="flex:1; background: #f8f8f8; border-radius: 10px; padding: 24px 24px 24px 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+    <h2 style="color:#19245c; font-size: 28px; font-weight: 700; margin-bottom: 18px; letter-spacing: 1px;">
+      QUY ĐỊNH MƯỢN TÀI LIỆU
+    </h2>
+    <ol style="font-size: 17px; line-height: 1.8; color: #222; padding-left: 20px;">
+      <li><b style="font-size: 17px;">Bạn đọc vào kho chọn tài liệu</b>, sau đó mang tài liệu cần mượn đến quầy làm thủ tục đăng ký mượn.</li>
+      <li><b style="font-size: 17px;">Bạn đọc sử dụng thẻ</b> (thẻ Sinh viên, Giảng viên, Nhân viên) của trường.</li>
+      <li style="color:#000000; font-weight:600; font-size: 17px;">Không được sử dụng thẻ của người khác để mượn sách, hoặc cho người khác mượn thẻ.</li>
+      <li>
+        <b style="font-size: 17px;">Số lượng và thời hạn tài liệu được mượn:</b>
+        <ol style="font-size: 16px; margin-top: 6px;">
+          <li><b>Sinh viên:</b> 03 tài liệu cho mỗi lần mượn, thời gian mượn tối đa là <b>02 tuần</b> và được phép gia hạn thêm 02 tuần (trừ ngày nghỉ Lễ, Tết).</li>
+          <li><b>Cán bộ, Giảng viên:</b> 05 tài liệu, thời gian mượn tối đa là <b>3 tuần</b>, được phép gia hạn thêm 02 tuần (trừ ngày nghỉ Lễ, Tết).</li>
+        </ol>
+      </li>
+      <li style="font-size: 17px;">Bạn đọc cần kiểm tra kỹ tình trạng của tài liệu và báo lại cho thủ thư trước khi mang tài liệu ra khỏi phòng mượn. Nếu thấy tài liệu có dấu hiệu bị rách, mất trang, mất mã vạch, bị ghi chép,… mà không báo thì vẫn bị phạt theo Quy định của Thư viện.</li>
+      <li style="font-size: 17px;"><b>Túi xách, vật dụng cá nhân</b> để đúng nơi quy định. Bạn đọc tự bảo quản tài sản cá nhân có giá trị, thư viện không chịu trách nhiệm bảo quản tài sản tư trang của bạn đọc.</li>
+    </ol>
+  </div>
+</section>
+    <footer
+      style="
+        text-align: left;
+        padding-left: 100px;
+        font-size: 15px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        font-family: Arial, sans-serif;
+      "
+    >
+      <div>
+        <span style="font-weight: bold; font-size: 20px; letter-spacing: 1px">
+          THƯ VIỆN ĐẠI HỌC THÁI BÌNH DƯƠNG
+        </span><br />
+        79 Mai Thị Dõng, Phường Vĩnh Ngọc, Thành Phố Nha Trang, Tỉnh Khánh Hòa<br />
+        SDT:<br><br>
+        <span>Bản quyền &copy; 2025 của Thư viện TBD</span>
+      </div>
+
+      <div
+        style="
+          border-left: 2px solid #ffffff;
+          height: 40px;
+          margin-left: 80px;
+          margin-right: 50px;
+          margin-top: 18px; /* Thêm dòng này để đẩy slogan xuống */
+        "
+      ></div>
+
+      <div
+        style="
+          font-size: 30px;
+          font-style: italic;
+          font-weight: 500;
+          margin-left: 0;
+          white-space: pre-line;
+          font-family: Arial, sans-serif;
+          display: flex;
+          align-items: center;
+          height: 40px;
+        "
+      >
+        Niềm tin vào tri thức, niềm tin vào tương lai.
+      </div>
+    </footer>
+  </body>
+</html>
